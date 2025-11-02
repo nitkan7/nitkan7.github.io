@@ -4,5 +4,6 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+> Well this is just a blog where I noodle around SQL server, posting things about whatever I've known, gone through and currently going through, being a SQL server DBA
+
+![Hello, World!](../assets/img/favicons/Hello_World_SSMS.png)

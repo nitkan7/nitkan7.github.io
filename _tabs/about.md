@@ -7,3 +7,4 @@ order: 4
 > Well this is just a blog where I noodle around SQL server, posting things about whatever I've known, gone through and currently going through, being a SQL server DBA
 
 
+![hello,world](../assets/img/favicons/Hello_World_SSMS.png)

@@ -95,7 +95,7 @@ theme_mode: # [light | dark]
 # will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-cdn: 'https://github.com/nitkan7/nitkan7.github.io/blob/main/assets/img/favicons/favicon.ico'
+cdn:
 
 # the avatar on sidebar, support local or CORS resources
 avatar: "../assets/img/favicons/favicon_clear_version.png"

@@ -118,11 +118,15 @@ We're going to take a lot of observation from these baseline metrics.
 
 This is the output from the **sys.dm_db_index_physical_stats** function, this gives us a lot of depth as to how things are, underneath the hood.
 
+![baseline_table](../assets/img/post_assets/post_9/index.png)
+
+This is how an index looks under the hood (Image taken from [here](https://use-the-index-luke.com/sql/anatomy/the-tree)). Now, the output may make a bit sense to you.
+
 #### What do the numbers mean ?
 
 
 ##### **Index Depth**
-- **index_depth = 3**  
+- **index_depth = 3**  - total number of levels in the B-tree (this column shows 3 in all the rows of the output)
   The entire B-tree has **3 levels**:
   - **Level 0** → Leaf (data pages)
   - **Level 1** → Intermediate
@@ -130,8 +134,8 @@ This is the output from the **sys.dm_db_index_physical_stats** function, this gi
 
 
 
-##### **Index Levels**
-- **index_level**
+##### **Index Levels** 
+- **index_level** (This column tells more about individual level number and its content)
   - **0** → Leaf level (actual data pages)
   - **1** → Intermediate level
   - **2** → Root level
@@ -180,13 +184,6 @@ This is the output from the **sys.dm_db_index_physical_stats** function, this gi
 
 
 Yeah, I know you read every single line from the output that I provided 🌚. But seriously, Consider taking a minute or two to read these lines and what they mean....(Just to appreciate my efforts to format them 🥺)
-
-Okay... for Too Long, Did not read people...
-
-![baseline_table](../assets/img/post_assets/post_9/index.png)
-
-This is how an index looks under the hood (Image taken from [here](https://use-the-index-luke.com/sql/anatomy/the-tree)). Now, the output may make a bit sense to you.
-
 
 For now, We have the baseline metric. We will proceed to blow up the index and recreate it using fill factor = 1 and see how things move from there...
 

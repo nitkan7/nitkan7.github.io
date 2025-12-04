@@ -78,7 +78,12 @@ Let's get the page details, what are the pages present and stuff...
 We're going to use **DBCC IND**. DBCC IND is an undocumented SQL Server command that lists all the pages associated with a specific table or index in a database. Also shows details like PageID, FileID, page type, index level, and linkage pointers. 
 
 ```sql
-DBCC IND ('LinkageLab', 'dbo.Table1',2);
+-- Lists all pages for the specified object and index in the database.
+-- Syntax: DBCC IND (DatabaseName, TableName, IndexID)
+-- 'LinkageLab' = Database name
+-- 'dbo.Table1' = Table name
+-- 2 = Index ID (2 means a nonclustered index; 0 = heap, 1 = clustered index)
+DBCC IND ('LinkageLab', 'dbo.Table1', 2);
 GO
 ```
 
@@ -96,6 +101,12 @@ Next, let's pick a page(page 817) and see what's inside that... How? using DBCC 
 DBCC PAGE is another undocumented diagnostic command in SQL Server that lets you inspect the contents of a specific data page at a very low level.
 
 ```sql
+-- Dumps the contents of a specific page for low-level inspection.
+-- Syntax: DBCC PAGE (DatabaseName, FileID, PageID, PrintOption)
+-- 'LinkageLab' = Database name
+-- 1 = File ID (usually the primary data file)
+-- 635 = Page ID (the page number within that file)
+-- 2 = Print option (0 = header only, 1 = header + row hex, 2 = header + full page hex, 3 = header + interpreted rows)
 DBCC PAGE ('LinkageLab', 1, 635, 2);
 GO
 ```
@@ -152,8 +163,8 @@ Sweet ! We have broken the chain ! Now let's run the SELECT statement and see...
 ![baseline_table](../assets/img/post_assets/post_10/finalplan.png)
 
 **OBSERVATIONS:**
-- The SELECT works fine, but we've lost half the number of rows!
-- At the baseline, we read 7 pages. Now, we lost 3 pages after 817 due to the miss.
+- The SELECT works fine, but we've lost half the number of rows!(dropped to 1300 from 2600)(probably since we chose like middle page out of the list of pages)...
+- At the baseline, we read 7 pages. Now it is 4, we lost 3 pages after 817 due to the miss.
 - As far as the plan is concerned, am not exactly sure why it shows what it shows...
 
 
@@ -168,7 +179,7 @@ DBCC CHECKDB('LinkageLab',REPAIR_REBUILD)  ;
 ALTER DATABASE LinkageLab SET MULTI_USER WITH ROLLBACK IMMEDIATE;
 ```
 
-![baseline_table](../assets/img/post_assets/post_10/fix.png)
+![baseline_table](../assets/img/post_assets/post_10/fix1.png)
 
 Post fixing, SELECT will work as expected !
 

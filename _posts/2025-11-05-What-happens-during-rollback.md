@@ -16,7 +16,7 @@ We'll jump into more specifics as we go more into the experiment...
 ### What are we upto today ?
 We'll just UPDATE some records, kill the transaction without commiting and we'll check at the log record and page level as to what are all the changes that happens during the rollback process...
 
-We'll setup the environment... This will be a two act kind of thing, where, once session will be the runner and the other one will be the observer.
+We'll setup the environment... This will be a **two act** kind of thing, where, **one session will be the runner** and the **other one will be the observer**.
 
 ```sql
 --Environment

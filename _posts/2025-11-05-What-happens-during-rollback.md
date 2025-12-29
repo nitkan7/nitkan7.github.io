@@ -146,6 +146,8 @@ around 20k modify logs have been written for our 20k updates.
 
 Now, let's take a look at how the page level contents have modified... We'll look at the id 22222 that we modified specifically, so that we can get a clear idea as to what has happened.
 
+We can see the value change to **MODIFIED_BEFORE_ROLLBACK** from 'ORIGINAL' at the page level !!!. STILL, the TRANSACTION HAS NOT YET COMMITTED ! So,**WHAT WE SEE MAY OR MAY NOT BE THE TRUTH! 🫢**
+
 ![baseline_table](../assets/img/post_assets/post_11/prerollback_page_content_update.png)
 
 We will also try SELECTing data as a whole. When we SELECT data, as expected, the session gets blocked, since the transaction is still open.
@@ -215,6 +217,7 @@ Rollback itself may need additional locks to apply undo safely.
 
 - Rollback doesn’t delete log records; it adds new ones for compensation. So the log grows during rollback!
 - Rollback is a single-threaded process ! Even if your inserts happened using multiple threads, rollbacks happen using a single thread, that's why they say rollbacks take equal or longer time to happen.
+- NOLOCK is a double edged sword... DATA may not be CONSISTENT !
 
 Sorry if I had spammed with a lot of images and if it's a tough one to read... Please let me know if the writing can be improved in any way...
 

@@ -1,9 +1,9 @@
 ---
-title: "Why is SQL server using the wrong index for my query ?"
+title: "Why forcing an index for a query may not be that effective...?"
 date: 2025-12-29 
 categories: [Index]
 tags: [index, page]     # TAG names should always be lowercase
-description: "Why forcing an index may not be that effective..."
+description: "Why it's bad to force anyone to do anything and how SQL server does the math behind the scenes while picking a way to do the things..."
 ---
 
 Okay... Let's play a game... I will show you a table, you predict the execution plan...
